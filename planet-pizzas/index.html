@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Inicial - Planet Pizzas e Lanches | Consult Delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#B70C00; --red-dark:#8A0900; --black:#0D0D0D; --offwhite:#E9E6E0;
+    --ink:#0D0D0D; --muted:#6f6f6f; --line:#E2E0DC; --bg:#F2F1EE; --card:#FFFFFF;
+    --red-soft:#fbe9e7;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:'Montserrat',-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:118px;font-weight:500}
+  .anton{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;line-height:.98}
+  .wrap{max-width:760px;margin:0 auto}
+
+  header{background:var(--black);color:#fff;padding:24px 20px 0}
+  .hd-top{display:flex;align-items:center;gap:14px}
+  .wordmark{display:flex;align-items:center;gap:9px}
+  .foguete-wm{width:14px;height:30px;flex:none;border-radius:40% 40% 45% 45%/55% 55% 45% 45%;background:#B70C00}
+  .wm-text{color:#fff;font-size:20px;line-height:.82;letter-spacing:.5px}
+  .hd-rule{height:1px;background:var(--red);flex:1;opacity:.9}
+  header h1{margin:20px 0 6px;font-size:30px}
+  header h1 .k{color:var(--red)}
+  .sub{font-size:14px;color:var(--offwhite);font-weight:600;letter-spacing:.3px}
+  .pill{display:inline-block;border:1.5px solid var(--red);color:#fff;border-radius:999px;
+    padding:6px 14px;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:14px 0 22px}
+  .hd-bottom{height:6px;background:var(--red)}
+
+  .intro{max-width:760px;margin:18px auto 0;padding:0 16px}
+  .intro-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:4px;padding:18px}
+  .intro-card h2{margin:0 0 8px;font-size:18px;color:var(--red)}
+  .intro-card p{margin:6px 0;font-size:14px;color:#333}
+  .how{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .how-step{flex:1;min-width:150px;background:#faf9f7;border:1px solid var(--line);border-radius:4px;padding:11px 12px;font-size:12.5px;color:#333}
+  .how-step b{display:block;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;color:var(--red);font-size:12.5px;letter-spacing:.5px;margin-bottom:3px}
+
+  .progress-bar{max-width:760px;margin:14px auto 0;padding:0 16px}
+  .pb-track{background:var(--black);color:#fff;border-radius:4px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .pb-track b{font-family:'Oswald',sans-serif;color:var(--red);font-size:15px}
+  .pb-meter{height:6px;background:#e3e1dd;border-radius:999px;margin-top:8px;overflow:hidden}
+  .pb-fill{height:100%;width:0;background:var(--red);transition:width .3s}
+
+  main{max-width:760px;margin:0 auto;padding:6px 16px}
+  .section-h{margin:26px 2px 12px;font-size:19px;color:var(--black);display:flex;align-items:center;gap:10px}
+  .section-h .mk{width:12px;height:24px;flex:none;border-radius:40% 40% 45% 45%/55% 55% 45% 45%;background:var(--red)}
+  .section-h .ln{height:2px;background:var(--red);flex:1;border-radius:2px}
+
+  .item{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:13px;transition:border-color .18s,box-shadow .18s}
+  .item.is-approved{border-color:var(--red);box-shadow:0 2px 10px rgba(183,12,0,.10)}
+  .item.is-rejected{border-color:#cfcdc9;opacity:.82}
+  .item-top{display:flex;align-items:flex-start;gap:12px}
+  .num{flex:none;width:30px;height:30px;border-radius:4px;background:var(--black);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .item h3{margin:0;font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;line-height:1.25;color:var(--black)}
+  .label{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 0;margin-bottom:4px;color:var(--red)}
+  .txt{font-size:13.8px;color:#333;margin:3px 0 0}
+  .acao-box{margin-top:11px;background:#faf9f7;border-left:3px solid var(--red);border-radius:0 4px 4px 0;padding:10px 13px}
+  .acao-box .label{color:var(--black)}
+  .acao-box .txt{color:#2a2a2a}
+
+  .controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .btn{flex:1;min-width:130px;border:1.5px solid var(--line);background:#fff;border-radius:4px;padding:11px 8px;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;cursor:pointer;color:#555;transition:all .15s}
+  .btn:hover{border-color:#b9b7b2}
+  .btn.approve.on{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.reject.on{background:var(--black);border-color:var(--black);color:#fff}
+  .note-wrap{margin-top:11px;display:none}
+  .note-wrap.show{display:block}
+  .note-wrap label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);display:block;margin-bottom:5px}
+  textarea{width:100%;border:1px solid var(--line);border-radius:4px;padding:10px;font-size:13.5px;font-family:'Montserrat',sans-serif;resize:vertical;min-height:56px;color:var(--ink)}
+  textarea:focus{outline:none;border-color:var(--red)}
+
+  .foot-note{text-align:center;font-size:11px;color:var(--muted);padding:20px 16px 4px;text-transform:uppercase;letter-spacing:.5px;line-height:1.7}
+
+  .footbar{position:fixed;left:0;right:0;bottom:0;background:var(--black);border-top:2px solid var(--red);padding:11px 16px;z-index:30}
+  .footbar-in{max-width:760px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between}
+  .foot-count{font-size:11px;color:var(--offwhite);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .foot-count b{font-family:'Oswald',sans-serif;color:#fff;font-size:15px}
+  .cta{background:var(--red);color:#fff;border:none;border-radius:999px;padding:13px 20px;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;transition:background .15s}
+  .cta:hover{background:var(--red-dark)}
+
+  .overlay{position:fixed;inset:0;background:rgba(13,13,13,.72);display:none;z-index:50;align-items:center;justify-content:center;padding:16px}
+  .overlay.show{display:flex}
+  .modal{background:#fff;border-radius:4px;border-top:5px solid var(--red);max-width:560px;width:100%;max-height:86vh;overflow:auto;padding:22px}
+  .modal h2{margin:0 0 4px;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;color:var(--black)}
+  .modal p.mh{font-size:12.5px;color:var(--muted);margin:0 0 14px}
+  .summary{background:#faf9f7;border:1px solid var(--line);border-radius:4px;padding:14px;font-size:12.5px;white-space:pre-wrap;color:#333;line-height:1.55}
+  .modal-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .modal-actions button{flex:1;min-width:150px;border-radius:999px;padding:12px;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;cursor:pointer;border:none}
+  .b-wa{background:var(--red);color:#fff}
+  .b-copy{background:var(--black);color:#fff}
+  .b-close{background:#eceae6;color:#444}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hd-top">
+      <div class="wordmark">
+        <span class="foguete-wm"></span>
+        <span class="wm-text anton">Consult<br>Delivery</span>
+      </div>
+      <span class="hd-rule"></span>
+    </div>
+    <h1 class="anton">Análise inicial<br>da sua <span class="k">loja</span></h1>
+    <div class="sub">Planet Pizzas e Lanches</div>
+    <span class="pill">Documento para sua aprovação</span>
+  </div>
+</header>
+<div class="hd-bottom"></div>
+
+<div class="intro">
+  <div class="intro-card">
+    <h2 class="anton" style="font-size:18px">Olá! Aqui está o diagnóstico da sua loja</h2>
+    <p>Entramos no Portal do Parceiro do iFood e analisamos a sua loja com calma, ponto a ponto. Reunimos abaixo as oportunidades de melhoria que encontramos. Cada item traz <b>o que observamos</b> e <b>o que sugerimos fazer</b>, em linguagem simples.</p>
+    <p>Sua loja já vende bem. O objetivo aqui é corrigir alguns pontos para <b>vender mais, perder menos pedidos e proteger a reputação</b> da loja no iFood.</p>
+    <div class="how">
+      <div class="how-step"><b>1. Leia cada item</b>Veja o achado e a ação sugerida.</div>
+      <div class="how-step"><b>2. Decida</b>Aprove, recuse ou deixe uma observação.</div>
+      <div class="how-step"><b>3. Envie</b>No final, gere o resumo e mande para a gente.</div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="pb-track">
+    <span>Itens revisados</span>
+    <span><b id="pbCount">0</b> de <span id="pbTotal">0</span></span>
+  </div>
+  <div class="pb-meter"><div class="pb-fill" id="pbFill"></div></div>
+</div>
+
+<main id="app"></main>
+
+<div class="foot-note">
+  Consult Delivery &middot; Consultoria para Delivery<br>
+  Nenhum ajuste é feito sem a sua autorização.
+</div>
+
+<div class="footbar">
+  <div class="footbar-in">
+    <div class="foot-count"><b id="fcApproved">0</b> aprovados &middot; <b id="fcRejected">0</b> recusados</div>
+    <button class="cta" onclick="openSummary()">Gerar resumo para enviar</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Resumo das suas respostas</h2>
+    <p class="mh">Copie o texto abaixo e envie no nosso WhatsApp. Assim seguimos com os ajustes que você autorizou.</p>
+    <div class="summary" id="summaryText"></div>
+    <div class="modal-actions">
+      <button class="b-wa" onclick="sendWhats()">Enviar no WhatsApp</button>
+      <button class="b-copy" onclick="copySummary()">Copiar texto</button>
+      <button class="b-close" onclick="closeSummary()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var WA_NUMBER = "5594984080683";
+var SECTIONS = [{"title":"Operação e Selo Super","items":[{"t":"Tempo de entrega muito alto no aplicativo","a":"Hoje o aplicativo mostra um tempo de entrega bem alto para quem vai comprar. No delivery, o cliente decide muito pelo tempo: quando vê um prazo longo, costuma escolher outra loja, mesmo que a sua entregue mais rápido na prática. O iFood também entende que a loja precisa de muito tempo e tende a dar menos visibilidade.","c":"Reduzir o tempo de entrega exibido para um patamar mais competitivo e ajustar a configuração de entrega, para a loja aparecer melhor e converter mais clientes novos."},{"t":"Confirmação de entrega não está sendo feita","a":"Os pedidos estão saindo sem a confirmação de entrega (o código do cliente). Sem essa confirmação, se um cliente disser que não recebeu o pedido, a loja fica sem como comprovar a entrega e acaba no prejuízo.","c":"Criar uma rotina simples de confirmação: o entregador envia o código do cliente no grupo e a loja confirma a entrega. Isso protege a loja em qualquer contestação."},{"t":"Cancelamentos por item indisponível","a":"Houve pedidos cancelados porque um item não estava disponível na hora. Normalmente isso acontece por falta de comunicação entre a cozinha e o caixa. Cada cancelamento desses pesa bastante na reputação da loja.","c":"Pausar o item no aplicativo assim que ele acabar e alinhar a comunicação da equipe, para o cliente nunca pedir algo que não tem."},{"t":"Métricas do Selo Super precisam melhorar","a":"A loja ainda não tem o Selo Super, e alguns indicadores que ele exige (nota, cancelamentos e chamados) estão fora da meta. O Super dá mais visibilidade, selo de destaque e acesso a recursos da plataforma.","c":"Trabalhar os pontos que afetam o Super: responder o chat do cliente rapidamente, reduzir cancelamentos e solicitar avaliações dos clientes."},{"t":"Reembolsos de cancelamento não estão sendo solicitados","a":"Quando um pedido é cancelado em situações em que a loja tem direito, é possível solicitar reembolso ao iFood. Hoje isso não está sendo feito, e a loja deixa de recuperar dinheiro que é seu.","c":"Passar a acompanhar os cancelamentos diariamente e solicitar o reembolso sempre que o caso for elegível. Essa economia entra no seu relatório."}]},{"title":"Cardápio e Ticket Médio","items":[{"t":"Reorganizar a ordem do cardápio","a":"Os produtos campeões de venda (como a pizza meia a meio, que é a mais pedida) estão posicionados lá embaixo. O cliente decide a compra no topo do cardápio: se não encontra logo o que quer, desiste e vai para outra loja.","c":"Reorganizar o cardápio colocando os mais pedidos e uma categoria de destaque no topo, facilitando a decisão de compra."},{"t":"Melhorar fotos e descrições dos produtos","a":"Algumas fotos estão escuras, cortadas ou com baixa qualidade, e faltam descrições que despertem desejo. A foto é a forma do cliente novo confiar na loja antes de comprar: sem isso, muita gente visualiza e não pede.","c":"Trocar por fotos melhores e mais apetitosas e escrever descrições que apresentem o produto (ingredientes, sabor), gerando confiança e desejo."},{"t":"Adicionar complementos, bordas e combos","a":"Vários produtos não têm complementos cadastrados (como bebida e borda) e faltam combos. Isso deixa de aumentar o valor de cada pedido, o famoso ticket médio.","c":"Cadastrar complementos sugestivos e criar combos (pizza com bebida, pizza com sobremesa, e assim por diante) para aumentar o valor médio dos pedidos sem precisar de mais clientes."},{"t":"Usar palavras-chave no nome dos produtos","a":"Alguns produtos não têm palavras como pizza no nome. Quando o cliente pesquisa no iFood, o sistema usa essas palavras para encontrar os itens; sem elas, a loja perde aparições.","c":"Ajustar os nomes dos produtos incluindo as palavras-chave certas, melhorando o posicionamento da loja nas buscas."},{"t":"Revisar itens pausados e que não vendem","a":"Há itens pausados ou que não são mais vendidos ocupando espaço no cardápio. Itens pausados ainda ocupam vaga em campanhas e listas, tirando a chance de produtos que vendem aparecerem.","c":"Limpar o cardápio: remover o que não será mais vendido e revisar o foco da loja, deixando espaço para os produtos certos nas campanhas."}]},{"title":"Marketing e Fidelização","items":[{"t":"Corrigir a configuração da campanha inteligente e dos cupons","a":"As campanhas e cupons que a loja já tem ativos estão configurados de uma forma que limita o resultado. A ferramenta está paga e ligada, mas não está rendendo o que poderia.","c":"Ajustar a configuração da campanha inteligente e dos cupons para o formato correto, aproveitando melhor o investimento que já existe."},{"t":"Focar em fidelizar a base próxima","a":"Boa parte das vendas vem de clientes novos e a recorrência (cliente que volta) está baixa. Depender só de cliente novo é arriscado e mais caro. Os clientes próximos da loja são os que mais valem a pena fidelizar.","c":"Concentrar esforços em encantar e fidelizar os clientes próximos, com uma estratégia de recorrência, reduzindo aos poucos a dependência de desconto."},{"t":"Reavaliar onde o investimento rende mais","a":"Existe verba sendo investida em anúncios e em incentivos. Nem sempre o anúncio é a alavanca que mais traz retorno; em muitos casos a entrega e as campanhas rendem mais por real investido.","c":"Testar a realocação do investimento para as alavancas de maior retorno, acompanhando os resultados antes de decidir em definitivo."},{"t":"Responder as avaliações dos clientes","a":"As avaliações dos clientes não estão sendo respondidas. Responder mostra cuidado, melhora a imagem da loja e ajuda a recuperar clientes insatisfeitos.","c":"Passar a responder todas as avaliações, positivas e negativas, com um tom profissional e acolhedor (cuidamos disso por você)."}]},{"title":"Posicionamento das 3 Lojas","items":[{"t":"As 3 lojas com a mesma marca concorrem entre si","a":"Você tem três lojas no iFood saindo do mesmo lugar, mas com a mesma marca e identidade. Assim, o cliente percebe que é a mesma loja e a venda acaba se dividindo entre elas, em vez de somar.","c":"Diferenciar as marcas e o público de cada loja (nome, identidade e posicionamento), para que cada uma atraia um cliente e a venda total cresça em vez de se dividir."}]}];
+var STORE_KEY = "consult_planet_pizzas_v2";
+var state = {};
+try { state = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch(e){ state = {}; }
+var app = document.getElementById('app');
+var idx = 0; var ids = [];
+SECTIONS.forEach(function(sec){
+  var h = document.createElement('div');
+  h.className = 'section-h anton';
+  h.innerHTML = '<span class="mk"></span><span>'+sec.title+'</span><span class="ln"></span>';
+  app.appendChild(h);
+  sec.items.forEach(function(it){
+    idx++; var id = 'i'+idx; ids.push(id);
+    var st = state[id] || {};
+    var card = document.createElement('div');
+    card.className = 'item'; card.id = 'card_'+id;
+    card.innerHTML =
+      '<div class="item-top">'+
+        '<div class="num">'+idx+'</div>'+
+        '<div style="flex:1">'+
+          '<span class="label">O que observamos</span>'+
+          '<h3>'+it.t+'</h3>'+
+          '<p class="txt">'+it.a+'</p>'+
+          '<div class="acao-box"><span class="label">O que sugerimos</span><p class="txt">'+it.c+'</p></div>'+
+          '<div class="controls">'+
+            '<button class="btn approve" data-id="'+id+'" data-v="approve">Aprovar</button>'+
+            '<button class="btn reject" data-id="'+id+'" data-v="reject">Recusar / observar</button>'+
+          '</div>'+
+          '<div class="note-wrap" id="note_'+id+'">'+
+            '<label>Observação ou motivo (opcional)</label>'+
+            '<textarea data-id="'+id+'" placeholder="Ex.: pode fazer, mas só a partir da semana que vem / não concordo porque...">'+(st.note?escapeHtml(st.note):'')+'</textarea>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    app.appendChild(card);
+  });
+});
+document.getElementById('pbTotal').textContent = ids.length;
+app.addEventListener('click', function(e){
+  var b = e.target.closest('.btn'); if(!b) return;
+  var id=b.dataset.id, v=b.dataset.v;
+  if(!state[id]) state[id]={};
+  state[id].decision = (state[id].decision===v)?null:v;
+  save(); applyCard(id);
+});
+app.addEventListener('input', function(e){
+  if(e.target.tagName==='TEXTAREA'){ var id=e.target.dataset.id; if(!state[id])state[id]={}; state[id].note=e.target.value; save(); }
+});
+function applyCard(id){
+  var card=document.getElementById('card_'+id); var st=state[id]||{};
+  card.querySelector('.approve').classList.toggle('on', st.decision==='approve');
+  card.querySelector('.reject').classList.toggle('on', st.decision==='reject');
+  card.classList.toggle('is-approved', st.decision==='approve');
+  card.classList.toggle('is-rejected', st.decision==='reject');
+  document.getElementById('note_'+id).classList.toggle('show', st.decision==='reject');
+  updateCounts();
+}
+function updateCounts(){
+  var ap=0,rj=0,done=0;
+  ids.forEach(function(id){var d=(state[id]||{}).decision; if(d==='approve'){ap++;done++;} else if(d==='reject'){rj++;done++;}});
+  document.getElementById('fcApproved').textContent=ap;
+  document.getElementById('fcRejected').textContent=rj;
+  document.getElementById('pbCount').textContent=done;
+  document.getElementById('pbFill').style.width=(done/ids.length*100)+'%';
+}
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,function(m){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];}); }
+ids.forEach(applyCard);
+function buildSummary(){
+  var n=0; var aprov=[],recus=[],pend=[];
+  SECTIONS.forEach(function(sec){sec.items.forEach(function(it){
+    n++; var id='i'+n; var st=state[id]||{};
+    var note = st.note && st.note.trim() ? ' - Obs.: '+st.note.trim() : '';
+    if(st.decision==='approve') aprov.push(n+'. '+it.t+note);
+    else if(st.decision==='reject') recus.push(n+'. '+it.t+note);
+    else pend.push(n+'. '+it.t);
+  });});
+  var NL=String.fromCharCode(10);
+  var s="*ANÁLISE INICIAL - PLANET PIZZAS E LANCHES*"+NL+"*Minhas respostas para a Consult Delivery:*"+NL;
+  s+=NL+"-- APROVADOS ("+aprov.length+") --"+NL+(aprov.length?aprov.join(NL):"(nenhum)");
+  s+=NL+NL+"-- RECUSADOS / COM OBSERVAÇÃO ("+recus.length+") --"+NL+(recus.length?recus.join(NL):"(nenhum)");
+  if(pend.length) s+=NL+NL+"-- AINDA NÃO DECIDIDOS ("+pend.length+") --"+NL+pend.join(NL);
+  s+=NL+NL+"Podem seguir com os itens aprovados. Obrigado!";
+  return s;
+}
+function openSummary(){ document.getElementById('summaryText').textContent=buildSummary(); document.getElementById('overlay').classList.add('show'); }
+function closeSummary(){ document.getElementById('overlay').classList.remove('show'); }
+function copySummary(){
+  var t=buildSummary();
+  navigator.clipboard.writeText(t).then(function(){var b=document.querySelector('.b-copy');var o=b.textContent;b.textContent='Copiado!';setTimeout(function(){b.textContent=o;},1800);})
+  .catch(function(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();var b=document.querySelector('.b-copy');b.textContent='Copiado!';});
+}
+function sendWhats(){ window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(buildSummary()),'_blank'); }
+document.getElementById('overlay').addEventListener('click',function(e){ if(e.target.id==='overlay') closeSummary(); });
+</script>
+</body>
+</html>
