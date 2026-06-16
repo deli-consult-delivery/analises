@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprovacao da Analise | Consult Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#B70C00;--red-dark:#8A0900;--black:#0D0D0D;--offwhite:#E9E6E0;--ink:#0D0D0D;--muted:#6f6f6f;--line:#E2E0DC;--bg:#F2F1EE;--card:#FFFFFF}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:'Montserrat',-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:120px;font-weight:500}
+  .anton{font-family:'Anton',Impact,sans-serif;text-transform:uppercase;letter-spacing:.5px;line-height:.98}
+  .wrap{max-width:760px;margin:0 auto}
+  header{background:var(--black);color:#fff;padding:22px 20px 0}
+  .hd-top{display:flex;align-items:center;gap:12px}
+  .wm-text{color:#fff;font-size:19px;line-height:.82;letter-spacing:.5px}
+  .hd-rule{height:1px;background:var(--red);flex:1;opacity:.9}
+  header h1{margin:18px 0 6px;font-size:26px}
+  header h1 .k{color:var(--red)}
+  .sub{font-size:14px;color:var(--offwhite);font-weight:600}
+  .pill{display:inline-block;border:1.5px solid var(--red);color:#fff;border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:13px 0 20px}
+  .hd-bottom{height:6px;background:var(--red)}
+  .intro{max-width:760px;margin:16px auto 0;padding:0 16px}
+  .intro-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:4px;padding:16px}
+  .intro-card h2{margin:0 0 6px;font-size:17px;color:var(--red)}
+  .intro-card p{margin:5px 0;font-size:13.5px;color:#333}
+  .progress-bar{max-width:760px;margin:14px auto 0;padding:0 16px}
+  .pb-track{background:var(--black);color:#fff;border-radius:4px;padding:11px 15px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .pb-track b{font-family:'Oswald',sans-serif;color:var(--red);font-size:15px}
+  .pb-meter{height:6px;background:#e3e1dd;border-radius:999px;margin-top:8px;overflow:hidden}
+  .pb-fill{height:100%;width:0;background:var(--red);transition:width .3s}
+  main{max-width:760px;margin:0 auto;padding:6px 16px}
+  .section-h{margin:24px 2px 10px;font-size:18px;color:var(--black);display:flex;align-items:center;gap:10px}
+  .section-h .mk{width:10px;height:20px;flex:none;border-radius:40% 40% 45% 45%/55% 55% 45% 45%;background:var(--red)}
+  .section-h .ln{height:2px;background:var(--red);flex:1;border-radius:2px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:15px;margin-bottom:12px;transition:border-color .18s}
+  .item.ap{border-color:var(--red);box-shadow:0 2px 10px rgba(183,12,0,.10)}
+  .item.rj{border-color:#cfcdc9;opacity:.85}
+  .item h3{margin:0 0 4px;font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;color:var(--black)}
+  .label{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:3px}
+  .txt{font-size:13.5px;color:#333;margin:2px 0 0}
+  .acao-box{margin-top:10px;background:#faf9f7;border-left:3px solid var(--red);border-radius:0 4px 4px 0;padding:9px 12px}
+  .acao-box .label{color:var(--black)}
+  .controls{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .btn{flex:1;min-width:130px;border:1.5px solid var(--line);background:#fff;border-radius:4px;padding:11px 8px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;cursor:pointer;color:#555}
+  .btn.approve.on{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.reject.on{background:var(--black);border-color:var(--black);color:#fff}
+  .note-wrap{margin-top:10px;display:none}
+  .note-wrap.show{display:block}
+  .note-wrap label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);display:block;margin-bottom:5px}
+  textarea{width:100%;border:1px solid var(--line);border-radius:4px;padding:10px;font-size:13px;font-family:'Montserrat',sans-serif;resize:vertical;min-height:52px}
+  textarea:focus{outline:none;border-color:var(--red)}
+  .footbar{position:fixed;left:0;right:0;bottom:0;background:var(--black);border-top:2px solid var(--red);padding:10px 16px;z-index:30}
+  .footbar-in{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .foot-count{font-size:11px;color:var(--offwhite);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .foot-count b{font-family:'Oswald',sans-serif;color:#fff;font-size:15px}
+  .cta{background:var(--red);color:#fff;border:none;border-radius:999px;padding:13px 20px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;cursor:pointer}
+  .cta[disabled]{opacity:.5;cursor:default}
+  .state{max-width:760px;margin:30px auto;padding:0 16px;text-align:center;color:var(--muted);font-size:14px}
+  .ok-box{background:#fff;border:1px solid var(--line);border-top:5px solid var(--red);border-radius:4px;padding:20px;text-align:center;max-width:520px;margin:24px auto}
+  .ok-box h2{font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--black);margin:0 0 8px}
+  @media (max-width:600px){header h1{font-size:22px}.wm-text{font-size:17px}.btn{min-width:100%}.footbar-in{justify-content:center}.foot-count{width:100%;text-align:center}.cta{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="hd-top"><span class="wm-text anton">Consult<br>Delivery</span><span class="hd-rule"></span></div>
+  <h1 class="anton">Analise inicial<br>da sua <span class="k">loja</span></h1>
+  <div class="sub" id="lojaNome">Carregando...</div>
+  <span class="pill">Documento para sua aprovacao</span>
+</div></header>
+<div class="hd-bottom"></div>
+
+<div id="content" style="display:none">
+  <div class="intro"><div class="intro-card">
+    <h2 class="anton" style="font-size:17px">Ola! Aqui esta o diagnostico da sua loja</h2>
+    <p>Leia cada ponto e toque em <b>Aprovar</b> ou <b>Recusar</b> (pode deixar uma observacao). Suas respostas sao salvas na hora. Ao terminar, toque em <b>Finalizar</b>.</p>
+  </div></div>
+  <div class="progress-bar"><div class="pb-track"><span>Itens revisados</span><span><b id="pbCount">0</b> de <span id="pbTotal">0</span></span></div><div class="pb-meter"><div class="pb-fill" id="pbFill"></div></div></div>
+  <main id="app"></main>
+</div>
+
+<div class="state" id="state">Carregando a analise...</div>
+
+<div class="footbar" id="footbar" style="display:none"><div class="footbar-in">
+  <div class="foot-count"><b id="fcA">0</b> aprovados &middot; <b id="fcR">0</b> recusados</div>
+  <button class="cta" id="fin" onclick="finalizar()">Finalizar e enviar</button>
+</div></div>
+
+<script>
+const API="https://czyanilrverorwenikqw.supabase.co/functions/v1/analise-aprovacao";
+const BLOCOS=[["operacao","Operacao e Selo Super"],["cardapio","Cardapio e Ticket Medio"],["marketing","Marketing e Fidelizacao"],["avaliacoes","Avaliacoes"],["identidade","Identidade e Posicionamento"],["suporte","Suporte"]];
+const token=new URLSearchParams(location.search).get("token");
+let tarefas=[];
+
+function esc(s){return (s||"").replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[m]));}
+
+async function load(){
+  if(!token){document.getElementById("state").textContent="Link invalido (sem token).";return;}
+  try{
+    const r=await fetch(API+"?token="+encodeURIComponent(token));
+    const d=await r.json();
+    if(!r.ok){document.getElementById("state").textContent=d.error||"Nao foi possivel carregar.";return;}
+    tarefas=d.tarefas||[];
+    document.getElementById("lojaNome").textContent=d.loja||"";
+    render();
+    document.getElementById("state").style.display="none";
+    document.getElementById("content").style.display="block";
+    document.getElementById("footbar").style.display="block";
+  }catch(e){document.getElementById("state").textContent="Erro de conexao. Tente novamente.";}
+}
+
+function render(){
+  const app=document.getElementById("app");app.innerHTML="";
+  let n=0;
+  BLOCOS.forEach(([key,nome])=>{
+    const its=tarefas.filter(t=>t.bloco===key);
+    if(!its.length)return;
+    const h=document.createElement("div");h.className="section-h anton";
+    h.innerHTML='<span class="mk"></span><span>'+nome+'</span><span class="ln"></span>';
+    app.appendChild(h);
+    its.forEach(t=>{
+      n++;
+      const ap=t.status==="aprovada",rj=t.status==="rejeitada";
+      const c=document.createElement("div");c.className="item"+(ap?" ap":"")+(rj?" rj":"");c.id="c_"+t.id;
+      c.innerHTML='<span class="label">O que observamos</span><h3>'+esc(t.titulo)+'</h3><p class="txt">'+esc(t.situacao)+'</p>'+
+        '<div class="acao-box"><span class="label">O que sugerimos</span><p class="txt">'+esc(t.o_que_sera_feito)+'</p></div>'+
+        '<div class="controls"><button class="btn approve'+(ap?" on":"")+'" onclick="decidir(\''+t.id+'\',\'aprovar\')">Aprovar</button>'+
+        '<button class="btn reject'+(rj?" on":"")+'" onclick="decidir(\''+t.id+'\',\'recusar\')">Recusar / observar</button></div>'+
+        '<div class="note-wrap'+(rj?" show":"")+'" id="n_"'+t.id+'><label>Observacao ou motivo (opcional)</label><textarea data-id="'+t.id+'" onchange="salvarNota(this)" placeholder="Ex.: pode fazer, mas so semana que vem..."></textarea></div>';
+      app.appendChild(c);
+    });
+  });
+  document.getElementById("pbTotal").textContent=tarefas.length;
+  counts();
+}
+
+async function decidir(id,decisao){
+  const t=tarefas.find(x=>x.id===id);if(!t)return;
+  const novo=decisao==="aprovar"?"aprovada":"rejeitada";
+  const prev=t.status;t.status=novo;applyCard(t);
+  const nota=(document.querySelector('textarea[data-id="'+id+'"]')||{}).value||"";
+  try{
+    const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token,action:"decidir",tarefa_id:id,decisao,nota})});
+    if(!r.ok){t.status=prev;applyCard(t);}
+  }catch(e){t.status=prev;applyCard(t);}
+}
+
+async function salvarNota(el){
+  const id=el.dataset.id;const t=tarefas.find(x=>x.id===id);if(!t||t.status!=="rejeitada")return;
+  try{await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token,action:"decidir",tarefa_id:id,decisao:"recusar",nota:el.value})});}catch(e){}
+}
+
+function applyCard(t){
+  const c=document.getElementById("c_"+t.id);if(!c)return;
+  const ap=t.status==="aprovada",rj=t.status==="rejeitada";
+  c.classList.toggle("ap",ap);c.classList.toggle("rj",rj);
+  c.querySelector(".approve").classList.toggle("on",ap);
+  c.querySelector(".reject").classList.toggle("on",rj);
+  const nw=c.querySelector(".note-wrap");if(nw)nw.classList.toggle("show",rj);
+  counts();
+}
+
+function counts(){
+  let a=0,r=0;tarefas.forEach(t=>{if(t.status==="aprovada")a++;else if(t.status==="rejeitada")r++;});
+  document.getElementById("fcA").textContent=a;document.getElementById("fcR").textContent=r;
+  document.getElementById("pbCount").textContent=a+r;
+  document.getElementById("pbFill").style.width=(tarefas.length?((a+r)/tarefas.length*100):0)+"%";
+}
+
+async function finalizar(){
+  const btn=document.getElementById("fin");btn.disabled=true;btn.textContent="Enviando...";
+  try{
+    const r=await fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({token,action:"finalizar"})});
+    const d=await r.json();
+    if(r.ok){
+      document.getElementById("content").innerHTML='<div class="ok-box"><h2>Recebido!</h2><p>Obrigado. Registramos suas respostas: <b>'+d.aprovadas+' aprovadas</b> e <b>'+d.rejeitadas+' recusadas</b>. Nossa equipe ja foi avisada e dara continuidade aos ajustes.</p></div>';
+      document.getElementById("footbar").style.display="none";window.scrollTo(0,0);
+    }else{btn.disabled=false;btn.textContent="Finalizar e enviar";alert(d.error||"Nao foi possivel finalizar.");}
+  }catch(e){btn.disabled=false;btn.textContent="Finalizar e enviar";alert("Erro de conexao.");}
+}
+
+load();
+</script>
+</body>
+</html>
